@@ -2,392 +2,497 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Resmi Pemerintah Kabupaten Pulau Taliabu</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Pemerintah Kabupaten Pulau Taliabu - Website Resmi</title>
+    <!-- Google Fonts: Poppins modern & profesional -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (Gratis) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS Library untuk scroll animasi -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f8fafc;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef9e6;
+            color: #2d2a24;
+            scroll-behavior: smooth;
             overflow-x: hidden;
         }
 
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(234, 179, 8, 0.95) 0%, rgba(202, 138, 4, 0.9) 100%), 
-                        url('https://images.unsplash.com/photo-1596422846543-75c6fc18a593?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
+        /* Tema Kuning Kabupaten Taliabu */
+        :root {
+            --primary-yellow: #FFC107;
+            --dark-gold: #E6A017;
+            --secondary-navy: #1e2a3e;
+            --soft-gray: #f8f9fa;
+            --text-dark: #2c3e2f;
+            --accent-green: #2c6e2f;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .nav-item {
-            position: relative;
+        /* Header / Navbar */
+        .navbar {
+            background: rgba(255, 255, 245, 0.98);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 0.8rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             transition: all 0.3s ease;
+            border-bottom: 3px solid var(--primary-yellow);
         }
 
-        @media (min-width: 1024px) {
-            .nav-item::after {
-                content: '';
-                position: absolute;
-                bottom: -2px;
-                left: 50%;
-                width: 0;
-                height: 2px;
-                background: #ca8a04;
-                transition: all 0.3s ease;
-                transform: translateX(-50%);
+        .nav-container {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 55px;
+            height: auto;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-navy);
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            letter-spacing: 1px;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--secondary-navy);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c3e2f;
+            padding: 0.5rem 0;
+            transition: 0.3s;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+
+        .nav-links a:hover, .nav-links .active-link {
+            color: var(--dark-gold);
+            border-bottom: 2px solid var(--dark-gold);
+        }
+
+        /* Dropdown menu styles */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 0.8rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s ease;
+            z-index: 999;
+            border-top: 4px solid var(--primary-yellow);
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dropdown-menu li {
+            padding: 0.4rem 1.2rem;
+        }
+        .dropdown-menu a {
+            font-size: 0.85rem;
+            color: #2d2a24;
+            border: none;
+        }
+        .dropdown-menu a:hover {
+            color: var(--dark-gold);
+            padding-left: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #fff3cf 0%, #ffe8b6 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #ffdd99;
+        }
+        .hero-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e2a3e;
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 1rem auto;
+        }
+        .btn-warning {
+            background: var(--primary-yellow);
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1e2a3e;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: 0.3s;
+            border: none;
+            text-decoration: none;
+        }
+        .btn-warning:hover {
+            background: #e6a017;
+            transform: translateY(-2px);
+        }
+
+        /* Section Umum */
+        .section-container {
+            max-width: 1300px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            border-left: 8px solid var(--primary-yellow);
+            padding-left: 20px;
+            margin-bottom: 2rem;
+            color: #1e2a3e;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #fff0cc;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            color: var(--secondary-navy);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .profile-eksekutif {
+            background: #fff6e5;
+            padding: 1.2rem;
+            border-radius: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ffe0aa;
+        }
+        th {
+            background: var(--primary-yellow);
+            color: #1e2a3e;
+        }
+        .galeri-img {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+            gap: 1rem;
+        }
+        .galeri-img img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: 0.2s;
+            border: 2px solid #ffdd99;
+        }
+        footer {
+            background: #1e2a2c;
+            color: #f0e6c5;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 992px) {
+            .menu-icon { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                background: white;
+                width: 80%;
+                height: 100vh;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.8rem;
+                transition: 0.3s;
+                box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+                z-index: 999;
             }
-            .nav-item:hover::after {
-                width: 100%;
+            .nav-links.active {
+                left: 0;
             }
-        }
-
-        .news-card:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Mobile Menu Animation */
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(100%);
-        }
-        #mobile-menu.active {
-            transform: translateX(0);
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                box-shadow: none;
+                padding-left: 1rem;
+                background: transparent;
+                display: none;
+            }
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
         }
     </style>
 </head>
-<body class="text-slate-900">
+<body>
 
-    <!-- Top Info Bar (Hidden on extra small screens) -->
-    <div class="bg-slate-900 text-white py-2 px-4 text-[10px] sm:text-[11px] font-medium tracking-wider">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-4 sm:space-x-6">
-                <span><i class="fas fa-map-marker-alt text-yellow-500 mr-1 sm:mr-2"></i> Bobong, Taliabu</span>
-                <span class="hidden sm:inline"><i class="fas fa-clock text-yellow-500 mr-2"></i> WITA</span>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo-area">
+            <!-- logo daerah (placeholder ikon) -->
+            <img class="logo-img" src="https://placehold.co/200x200/f7d44a/1e2a3e?text=Taliabu" alt="Logo Kabupaten Pulau Taliabu">
+            <div class="logo-text">
+                <h1>PEMKAB PULAU TALIABU</h1>
+                <p>MALUKU UTARA • BERKAH</p>
             </div>
-            <div class="flex items-center space-x-3 sm:space-x-4">
-                <a href="#" class="hover:text-yellow-400 transition">PPID</a>
-                <span class="opacity-30">|</span>
-                <div class="flex items-center space-x-2">
-                    <a href="#" class="w-5 h-5 flex items-center justify-center rounded-full bg-white/10 hover:bg-yellow-500 transition"><i class="fab fa-facebook-f text-[9px]"></i></a>
-                    <a href="#" class="w-5 h-5 flex items-center justify-center rounded-full bg-white/10 hover:bg-yellow-500 transition"><i class="fab fa-instagram text-[9px]"></i></a>
+        </div>
+        <div class="menu-icon" id="menuIcon">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" class="nav-item" data-section="home">Beranda</a></li>
+            <!-- Profile Pemda dengan dropdown -->
+            <li class="dropdown">
+                <a href="#">Profile Pemda <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" data-section="sambutan">Sambutan</a></li>
+                    <li><a href="#" data-section="visimisi">Visi & Misi</a></li>
+                    <li><a href="#" data-section="eksekutif">Profile Eksekutif</a></li>
+                    <li><a href="#" data-section="logo">Logo Kabupaten</a></li>
+                    <li><a href="#" data-section="sejarah">Sejarah Singkat</a></li>
+                </ul>
+            </li>
+            <!-- Kepegawaian -->
+            <li class="dropdown">
+                <a href="#">Kepegawaian <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" data-section="struktur">Struktur Kepegawaian</a></li>
+                    <li><a href="#" data-section="datapegawai">Data Kepegawaian</a></li>
+                </ul>
+            </li>
+            <!-- Instansi -->
+            <li class="dropdown">
+                <a href="#">Instansi <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" data-section="datainstansi">Data Instansi</a></li>
+                    <li><a href="#" data-section="datapns">Data PNS</a></li>
+                    <li><a href="#" data-section="datanonpns">Data Non Pegawai</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="nav-item" data-section="galeri">Galeri</a></li>
+            <li><a href="#" class="nav-item" data-section="agenda">Agenda Dinas</a></li>
+            <!-- Informasi Publik Dropdown -->
+            <li class="dropdown">
+                <a href="#">Informasi Publik <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" data-section="produkpemda">Produk Pemda</a></li>
+                    <li><a href="#" data-section="tangkas">Gerakan Tangkas</a></li>
+                    <li><a href="#" data-section="wasit">Si Wasit</a></li>
+                    <li><a href="#" data-section="pekerja">Si Pekerja</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Dynamic Main Content -->
+<main id="mainContent">
+    <!-- Beranda / Halaman Utama default -->
+    <div id="home" class="content-section active-section">
+        <div class="hero">
+            <div class="hero-content">
+                <h2>Selamat Datang di Portal Resmi</h2>
+                <p>Pemerintah Kabupaten Pulau Taliabu | Menuju Taliabu Maju, Sejahtera, dan Berkelanjutan</p>
+                <a href="#" class="btn-warning" data-section="visimisi">Visi & Misi Kami</a>
+            </div>
+        </div>
+        <div class="section-container">
+            <div class="card-grid">
+                <div class="card" data-aos="fade-up">
+                    <i class="fas fa-landmark" style="font-size: 2rem; color: var(--primary-yellow);"></i>
+                    <h3>Pelayanan Prima</h3>
+                    <p>Komitmen pelayanan publik yang cepat, transparan, dan akuntabel.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--primary-yellow);"></i>
+                    <h3>Pembangunan Infrastruktur</h3>
+                    <p>Mewujudkan konektivitas antar wilayah dan peningkatan ekonomi.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-users" style="font-size: 2rem; color: var(--primary-yellow);"></i>
+                    <h3>Partisipasi Masyarakat</h3>
+                    <p>Menggagas pembangunan partisipatif untuk seluruh lapisan.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Main Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 sm:h-20 items-center">
-                <!-- Logo Section -->
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <img src="image/logo pulau taliabu.png" alt="Logo Taliabu" class="h-10 sm:h-14 w-auto">
-                    <div>
-                        <h1 class="text-sm sm:text-lg font-extrabold text-slate-900 leading-tight uppercase tracking-tighter">Pemerintah Kabupaten</h1>
-                        <p class="text-[9px] sm:text-xs font-bold text-yellow-600 uppercase tracking-[0.2em]">Pulau Taliabu</p>
-                    </div>
-                </div>
+    <!-- Semua konten lain akan di load melalui JS -->
+    <div id="dynamic-pages"></div>
+</main>
 
-                <!-- Desktop Menu -->
-                <div class="hidden lg:flex items-center space-x-1">
-                    <a href="#" class="nav-item px-4 py-2 text-sm font-bold text-yellow-700">Beranda</a>
-                    <a href="#" class="nav-item px-4 py-2 text-sm font-bold text-slate-600 hover:text-yellow-600">Profil</a>
-                    <a href="#" class="nav-item px-4 py-2 text-sm font-bold text-slate-600 hover:text-yellow-600">Informasi</a>
-                    <a href="#" class="nav-item px-4 py-2 text-sm font-bold text-slate-600 hover:text-yellow-600">Layanan</a>
-                    <button class="ml-4 p-2.5 bg-yellow-400 text-slate-900 rounded-xl hover:bg-yellow-500 transition shadow-md">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+<footer>
+    <p>© 2025 Pemerintah Kabupaten Pulau Taliabu | Jl. Basuki Rahmat No. 1, Bobong | Email: humas@taliabukab.go.id</p>
+    <p>Website Resmi Pemerintah Daerah - Tema Kuning Kebanggaan Taliabu</p>
+</footer>
 
-                <!-- Mobile Toggle Button -->
-                <button id="menu-toggle" class="lg:hidden text-2xl text-slate-800 focus:outline-none p-2">
-                    <i class="fas fa-bars-staggered"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white lg:hidden flex flex-col p-6 overflow-y-auto">
-        <div class="flex justify-between items-center mb-10">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Lambang_Kabupaten_Pulau_Taliabu.png" alt="Logo" class="h-10">
-            <button id="menu-close" class="text-3xl text-slate-800"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="flex flex-col space-y-6">
-            <a href="#" class="text-xl font-bold text-yellow-600 border-b border-slate-50 pb-2">Beranda</a>
-            <a href="#" class="text-xl font-bold text-slate-800 border-b border-slate-50 pb-2">Profil Daerah</a>
-            <a href="#" class="text-xl font-bold text-slate-800 border-b border-slate-50 pb-2">Informasi Publik</a>
-            <a href="#" class="text-xl font-bold text-slate-800 border-b border-slate-50 pb-2">Layanan Digital</a>
-            <a href="#" class="text-xl font-bold text-slate-800 border-b border-slate-50 pb-2">Galeri</a>
-        </div>
-        <div class="mt-auto pt-10">
-            <button class="w-full bg-yellow-400 text-slate-900 py-4 rounded-2xl font-bold shadow-lg">
-                <i class="fas fa-search mr-2"></i> Cari Informasi
-            </button>
-        </div>
-    </div>
+    // Data konten untuk setiap menu (sesuai permintaan)
+    const contentData = {
+        sambutan: `<div class="section-container"><h2 class="section-title">Sambutan Bupati</h2><div class="card"><p><strong>Assalamu'alaikum Warahmatullahi Wabarakatuh,</strong></p><p>Salam sejahtera untuk kita semua. Puji syukur ke hadirat Tuhan Yang Maha Esa, Kabupaten Pulau Taliabu terus bergerak maju. Kami berkomitmen memberikan pelayanan terbaik dan mewujudkan kesejahteraan masyarakat. Mari kita bangun Taliabu yang bermartabat.</p><p style="margin-top:1rem;"><strong>Bupati Pulau Taliabu</strong><br>H. Aliong Mus, S.Sos., M.Si</p></div></div>`,
+        visimisi: `<div class="section-container"><h2 class="section-title">Visi & Misi</h2><div class="card"><h3>Visi Kabupaten Pulau Taliabu</h3><p>"Terwujudnya Masyarakat Taliabu yang Beriman, Berbudaya, Maju, Mandiri, dan Berkelanjutan"</p><h3 style="margin-top:1rem;">Misi</h3><ul><li>Meningkatkan kualitas sumber daya manusia yang berdaya saing.</li><li>Mengembangkan infrastruktur dasar dan ekonomi kerakyatan.</li><li>Mewujudkan tata kelola pemerintahan yang baik dan bersih.</li><li>Melestarikan budaya lokal dan lingkungan hidup.</li></ul></div></div>`,
+        eksekutif: `<div class="section-container"><h2 class="section-title">Profil Eksekutif</h2><div class="profile-eksekutif"><div class="card"><i class="fas fa-user-tie fa-2x" style="color:#E6A017;"></i><h3>Bupati: H. Aliong Mus, S.Sos., M.Si</h3><p>Memimpin Kabupaten Pulau Taliabu dengan semangat reformasi birokrasi dan pembangunan berkelanjutan.</p><hr><h3>Wakil Bupati: Ramli, S.E., M.M.</h3><p>Fokus pada pemberdayaan ekonomi dan pengembangan usaha mikro kecil menengah.</p><h3>Sekretaris Daerah: Drs. Ahmad Fauzi, M.Si</h3><p>Koordinator pelayanan publik dan administrasi pembangunan daerah.</p></div></div></div>`,
+        logo: `<div class="section-container"><h2 class="section-title">Logo Kabupaten Pulau Taliabu</h2><div class="card" style="text-align:center"><img src="https://placehold.co/400x400/f7d44a/1e2a3e?text=Logo+Taliabu" style="max-width:250px; border-radius: 20px;"><p><strong>Makna Logo:</strong> Perisai melambangkan pertahanan, pohon kelapa menggambarkan sumber daya alam unggulan, gelombang laut mencirikan wilayah kepulauan, serta warna kuning keemasan melambangkan kemuliaan dan kearifan lokal.</p></div></div>`,
+        sejarah: `<div class="section-container"><h2 class="section-title">Sejarah Singkat Kabupaten Pulau Taliabu</h2><div class="card"><p>Kabupaten Pulau Taliabu merupakan hasil pemekaran dari Kabupaten Kepulauan Sula berdasarkan Undang-Undang Nomor 6 Tahun 2013. Secara geografis terdiri dari Pulau Taliabu dan pulau-pulau kecil sekitarnya. Masyarakat Taliabu dikenal dengan kearifan lokal dan budaya Bahari yang kuat. Sejak diresmikan, pembangunan terus berakselerasi menuju kesejahteraan rakyat.</p></div></div>`,
+        struktur: `<div class="section-container"><h2 class="section-title">Struktur Kepegawaian</h2><div class="card"><p><strong>Struktur Organisasi Pemerintah Kabupaten Pulau Taliabu</strong></p><img src="https://placehold.co/800x400/fef1cf/2c3e2f?text=Struktur+Kepegawaian+Taliabu" style="width:100%; border-radius: 16px;"><p>Bagan Struktur Perangkat Daerah meliputi Sekretariat Daerah, Dinas, Badan, dan Kecamatan.</p></div></div>`,
+        datapegawai: `<div class="section-container"><h2 class="section-title">Data Kepegawaian</h2><div class="card"><table><tr><th>No</th><th>Jabatan</th><th>Jumlah</th></tr><tr><td>1</td><td>PNS</td><td>3.450 orang</td></tr><tr><td>2</td><td>PPPK</td><td>1.200 orang</td></tr><tr><td>3</td><td>Tenaga Honorer</td><td>890 orang</td></tr><tr><td colspan="2"><strong>Total ASN + Non ASN</strong></td><td><strong>5.540 orang</strong></td></tr></table><p>Update per Desember 2024.</p></div></div>`,
+        datainstansi: `<div class="section-container"><h2 class="section-title">Data Instansi Pemerintah</h2><div class="card"><table><tr><th>Instansi</th><th>Alamat</th><th>Kontak</th></tr><tr><td>Dinas Pendidikan</td><td>Jl. Merdeka No.12 Bobong</td><td>(0921) 321456</td></tr><tr><td>Dinas Kesehatan</td><td>Jl. Kesehatan No.8</td><td>(0921) 322789</td></tr><tr><td>Dinas PUPR</td><td>Jl. Pembangunan No.5</td><td>(0921) 323000</td></tr><tr><td>Kantor BKD</td><td>Jl. Pahlawan Komplek Perkantoran</td><td>(0921) 324111</td></tr></table></div></div>`,
+        datapns: `<div class="section-container"><h2 class="section-title">Data Pegawai Negeri Sipil (PNS)</h2><div class="card"><table><tr><th>Golongan</th><th>Laki-laki</th><th>Perempuan</th></tr><tr><td>Golongan IV</td><td>125</td><td>78</td></tr><tr><td>Golongan III</td><td>980</td><td>1020</td></tr><tr><td>Golongan II</td><td>845</td><td>402</td></tr><tr><td><strong>Total PNS</strong></td><td colspan="2"><strong>3.450</strong></td></tr></table></div></div>`,
+        datanonpns: `<div class="section-container"><h2 class="section-title">Data Non Pegawai (PPPK & Honorer)</h2><div class="card"><p>PPPK : 1.200 orang tersebar di berbagai OPD</p><p>Tenaga Harian Lepas / Honorer : 890 orang (kontrak daerah)</p><p>Total Non PNS terdaftar : 2.090 orang. Pemerintah daerah terus melakukan digitalisasi manajemen SDM.</p></div></div>`,
+        galeri: `<div class="section-container"><h2 class="section-title">Galeri Kegiatan</h2><div class="galeri-img"><img src="https://placehold.co/400x300/f7d44a/2d2a24?text=Kantor+Bupati+Taliabu"><img src="https://placehold.co/400x300/f7d44a/2d2a24?text=Panorama+Pantai+Taliabu"><img src="https://placehold.co/400x300/f7d44a/2d2a24?text=Musrenbang+2025"><img src="https://placehold.co/400x300/f7d44a/2d2a24?text=Seni+Budaya+Taliabu"><img src="https://placehold.co/400x300/f7d44a/2d2a24?text=Pelantikan+Pejabat"><img src="https://placehold.co/400x300/f7d44a/2d2a24?text=Program+Tangkas"></div><p class="card" style="margin-top:1rem;">Berbagai kegiatan unggulan dan potensi wisata Kabupaten Pulau Taliabu.</p></div>`,
+        agenda: `<div class="section-container"><h2 class="section-title">Agenda Dinas</h2><div class="card"><ul><li><strong>15 April 2025</strong> : Rapat Paripurna DPRD tentang APBD Perubahan</li><li><strong>20-22 April 2025</strong> : Kegiatan Bazar UMKM Taliabu Ekspo</li><li><strong>28 April 2025</strong> : Upacara Hari Otonomi Daerah</li><li><strong>1 Mei 2025</strong> : Apel Buruh dan Pemberian Penghargaan Pekerja Produktif</li><li><strong>5 Mei 2025</strong> : Monitoring program Si Pekerja oleh Dinas Tenaga Kerja</li></ul></div></div>`,
+        produkpemda: `<div class="section-container"><h2 class="section-title">Produk Pemda</h2><div class="card"><p>Produk unggulan daerah: Peraturan Daerah (Perda) tentang Rencana Pembangunan Jangka Menengah Daerah 2025-2030, Inovasi Layanan "SAPA TALIABU", serta produk fisik berupa fasilitas publik.</p><ul><li>Perda No.1/2024 Tata Ruang Wilayah</li><li>Aplikasi e-Office Taliabu</li><li>Program Desa Digital</li></ul></div></div>`,
+        tangkas: `<div class="section-container"><h2 class="section-title">Gerakan Tangkas (Terampil dan Aktif) </h2><div class="card"><p>Gerakan Tangkas merupakan program pemuda dan olahraga untuk meningkatkan partisipasi aktif generasi muda dalam pembangunan daerah. Meliputi pelatihan kepemimpinan, event olahraga, dan kegiatan sosial.</p><p><i class="fas fa-futbol"></i> Kompetisi Sepak Bola Taliabu Cup 2025, <i class="fas fa-hand-sparkles"></i> Pelatihan Kewirausahaan Pemuda.</p></div></div>`,
+        wasit: `<div class="section-container"><h2 class="section-title">Si Wasit (Sistem Informasi Wasiat Masyarakat)</h2><div class="card"><p>Si Wasit adalah platform pengaduan dan aspirasi masyarakat yang transparan. Masyarakat dapat menyampaikan laporan pembangunan, pelayanan publik, serta saran. Layanan terintegrasi dengan Inspektorat Daerah.</p><p><strong>Hotline Wasit:</strong> 0812-3456-7890 atau email: siwasit@taliabukab.go.id</p></div></div>`,
+        pekerja: `<div class="section-container"><h2 class="section-title">Si Pekerja (Sistem Informasi Ketenagakerjaan)</h2><div class="card"><p>Si Pekerja menyediakan data lowongan kerja, pelatihan vokasi, dan perlindungan tenaga kerja. Bekerja sama dengan Dinas Tenaga Kerja dan perusahaan mitra.</p><p>Fitur: Job Fair Online, Sertifikasi Kompetensi, dan Bursa Kerja Khusus (BKK).</p></div></div>`
+    };
+    
+    // fungsi untuk merender konten
+    function loadSection(sectionId) {
+        const dynamicContainer = document.getElementById('dynamic-pages');
+        const homeDiv = document.getElementById('home');
+        if (sectionId === 'home') {
+            homeDiv.style.display = 'block';
+            dynamicContainer.innerHTML = '';
+            // update active nav style visual
+        } else {
+            homeDiv.style.display = 'none';
+            if (contentData[sectionId]) {
+                dynamicContainer.innerHTML = contentData[sectionId];
+            } else {
+                dynamicContainer.innerHTML = `<div class="section-container"><div class="card"><h3>Informasi</h3><p>Konten sedang dalam pengembangan.</p></div></div>`;
+            }
+        }
+        // scroll ke atas halus
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // AOS refresh jika ada elemen baru
+        AOS.refresh();
+    }
 
-    <!-- Hero Section -->
-    <header class="hero-gradient relative py-12 sm:py-20 lg:py-32 overflow-hidden text-center lg:text-left">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="text-white">
-                    <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 border border-white/30">Portal Resmi Daerah</span>
-                    <h2 class="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 leading-tight tracking-tighter">
-                        Wujudkan Taliabu <br class="hidden sm:block"><span class="text-slate-900 underline decoration-yellow-300">Mandiri & Berbudaya</span>
-                    </h2>
-                    <p class="text-sm sm:text-lg text-white/90 mb-8 sm:mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                        Selamat datang di pusat informasi dan layanan digital Kabupaten Pulau Taliabu. Melayani dengan transparansi dan inovasi.
-                    </p>
-                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4">
-                        <a href="#" class="bg-slate-900 text-white px-6 py-3.5 sm:px-8 sm:py-4 rounded-2xl font-bold hover:bg-slate-800 transition flex items-center justify-center shadow-xl text-sm sm:text-base">
-                            <i class="fas fa-rocket mr-3 text-yellow-400"></i> Layanan Publik
-                        </a>
-                        <a href="#" class="bg-white text-yellow-700 px-6 py-3.5 sm:px-8 sm:py-4 rounded-2xl font-bold hover:bg-yellow-50 transition flex items-center justify-center shadow-xl text-sm sm:text-base">
-                            E-Government <i class="fas fa-arrow-right ml-3"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Featured Leaders (Hidden on small mobile, simplified on tablet) -->
-                <div class="hidden sm:block lg:block relative">
-                    <div class="glass-card p-6 lg:p-8 rounded-[2rem] lg:rounded-[3rem] border border-white/40 shadow-2xl relative overflow-hidden">
-                        <div class="flex items-center space-x-4 lg:space-x-6 mb-6 lg:mb-8 text-left">
-                            <div class="w-16 h-16 lg:w-24 lg:h-24 rounded-2xl bg-yellow-100 overflow-hidden border-2 border-yellow-400">
-                                <img src="image/bupati taliabu.png" alt="Bupati" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h3 class="text-lg lg:text-xl font-black text-slate-900">Sashabila Widya Mus B.A</h3>
-                                <p class="text-[10px] lg:text-sm font-bold text-yellow-700">Bupati Pulau Taliabu</p>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-white/50 rounded-2xl border border-white text-left">
-                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Motto Daerah</p>
-                            <p class="text-sm lg:text-lg font-extrabold italic text-slate-800">"Hemungsia Sia Dufu"</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Quick Stats (Scrollable on Mobile) -->
-    <div class="max-w-7xl mx-auto px-4 -mt-6 sm:-mt-10 relative z-20 overflow-x-auto pb-4 no-scrollbar">
-        <div class="flex sm:grid sm:grid-cols-2 md:grid-cols-4 gap-4 min-w-[600px] sm:min-w-0">
-            <div class="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-lg border border-slate-100 flex items-center space-x-4 flex-1">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div>
-                    <p class="text-lg sm:text-2xl font-black text-slate-900 leading-none">60K+</p>
-                    <p class="text-[9px] font-bold text-slate-400 uppercase mt-1 tracking-wider">Penduduk</p>
-                </div>
-            </div>
-            <div class="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-lg border border-slate-100 flex items-center space-x-4 flex-1">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600">
-                    <i class="fas fa-map"></i>
-                </div>
-                <div>
-                    <p class="text-lg sm:text-2xl font-black text-slate-900 leading-none">8</p>
-                    <p class="text-[9px] font-bold text-slate-400 uppercase mt-1 tracking-wider">Kecamatan</p>
-                </div>
-            </div>
-            <div class="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-lg border border-slate-100 flex items-center space-x-4 flex-1">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600">
-                    <i class="fas fa-building"></i>
-                </div>
-                <div>
-                    <p class="text-lg sm:text-2xl font-black text-slate-900 leading-none">71</p>
-                    <p class="text-[9px] font-bold text-slate-400 uppercase mt-1 tracking-wider">Desa</p>
-                </div>
-            </div>
-            <div class="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-lg border border-slate-100 flex items-center space-x-4 flex-1">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div>
-                    <p class="text-lg sm:text-2xl font-black text-slate-900 leading-none">4.5</p>
-                    <p class="text-[9px] font-bold text-slate-400 uppercase mt-1 tracking-wider">IKM</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-12 sm:py-20">
-        <div class="grid lg:grid-cols-3 gap-10 lg:gap-12">
-            
-            <!-- News Section -->
-            <div class="lg:col-span-2">
-                <div class="flex justify-between items-end mb-8">
-                    <h3 class="text-xl sm:text-2xl font-black text-slate-900">Warta Terkini</h3>
-                    <a href="#" class="text-xs font-bold text-yellow-700 flex items-center">
-                        Lihat Semua <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-
-                <div class="space-y-6 sm:space-y-8">
-                    <!-- Main News Item -->
-                    <article class="news-card group bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 transition-all">
-                        <div class="flex flex-col md:flex-row">
-                            <div class="h-48 md:h-auto md:w-2/5 overflow-hidden">
-                                <img src="image/images.jpg" alt="News" class="w-full h-full object-cover transition-transform duration-500">
-                            </div>
-                            <div class="p-6 sm:p-8 md:w-3/5">
-                                <span class="text-[10px] font-black text-yellow-600 uppercase mb-3 inline-block">Pembangunan</span>
-                                <h4 class="text-lg sm:text-xl font-extrabold mb-3 group-hover:text-yellow-700 transition leading-tight">Percepatan Infrastruktur Jalan Lingkar Pulau Taliabu Menuju Konektivitas Desa</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mb-6 line-clamp-2">Pemerintah Kabupaten terus mendorong penyelesaian pengaspalan jalan yang menghubungkan antar kecamatan...</p>
-                                <div class="flex items-center justify-between mt-auto pt-4 border-t border-slate-50">
-                                    <span class="text-[10px] font-bold text-slate-400">26 Maret 2026</span>
-                                    <button class="text-yellow-600 font-bold text-xs">Baca Selengkapnya <i class="fas fa-chevron-right ml-1"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Small News Grid (Stacked on mobile, 2 columns on tablet+) -->
-                    <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
-                        <article class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-                            <span class="text-[9px] font-bold text-yellow-600 uppercase mb-2 block">Kesehatan</span>
-                            <h5 class="font-bold text-slate-900 text-sm mb-4 line-clamp-2">Peningkatan Fasilitas RSUD Bobong dengan Penambahan Ruang Rawat</h5>
-                            <span class="text-[9px] font-bold text-slate-400">24 Mar 2026</span>
-                        </article>
-                        <article class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-                            <span class="text-[9px] font-bold text-yellow-600 uppercase mb-2 block">Ekonomi</span>
-                            <h5 class="font-bold text-slate-900 text-sm mb-4 line-clamp-2">Peluncuran Program Kredit Usaha Rakyat Taliabu untuk UMKM Pesisir</h5>
-                            <span class="text-[9px] font-bold text-slate-400">22 Mar 2026</span>
-                        </article>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sidebar Widgets -->
-            <div class="space-y-8">
-                <!-- Services Widget -->
-                <div class="bg-slate-900 rounded-[2rem] p-6 text-white shadow-xl">
-                    <h3 class="text-lg font-black mb-6">Layanan Digital</h3>
-                    <div class="grid grid-cols-2 gap-3">
-                        <a href="#" class="p-4 bg-white/5 rounded-xl hover:bg-yellow-500 hover:text-slate-900 transition text-center flex flex-col items-center">
-                            <i class="fas fa-id-card text-lg mb-2"></i>
-                            <span class="text-[9px] font-bold uppercase tracking-wider">Adminduk</span>
-                        </a>
-                        <a href="#" class="p-4 bg-white/5 rounded-xl hover:bg-yellow-500 hover:text-slate-900 transition text-center flex flex-col items-center">
-                            <i class="fas fa-file-signature text-lg mb-2"></i>
-                            <span class="text-[9px] font-bold uppercase tracking-wider">Perizinan</span>
-                        </a>
-                        <a href="#" class="p-4 bg-white/5 rounded-xl hover:bg-yellow-500 hover:text-slate-900 transition text-center flex flex-col items-center">
-                            <i class="fas fa-user-graduate text-lg mb-2"></i>
-                            <span class="text-[9px] font-bold uppercase tracking-wider">Beasiswa</span>
-                        </a>
-                        <a href="#" class="p-4 bg-white/5 rounded-xl hover:bg-yellow-500 hover:text-slate-900 transition text-center flex flex-col items-center">
-                            <i class="fas fa-briefcase text-lg mb-2"></i>
-                            <span class="text-[9px] font-bold uppercase tracking-wider">Loker</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Announcement -->
-                <div class="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm">
-                    <h3 class="text-base font-black text-slate-900 mb-6 flex items-center">
-                        <i class="fas fa-bullhorn text-yellow-500 mr-3"></i> Pengumuman
-                    </h3>
-                    <div class="space-y-5">
-                        <div class="border-l-3 border-yellow-400 pl-3">
-                            <p class="text-xs font-bold text-slate-800 line-clamp-2 mb-1">Jadwal Seleksi Terbuka JPT Pratama Taliabu</p>
-                            <span class="text-[9px] font-bold text-slate-400">26 Mar 2026</span>
-                        </div>
-                        <div class="border-l-3 border-slate-200 pl-3">
-                            <p class="text-xs font-bold text-slate-800 line-clamp-2 mb-1">Waspada Cuaca Ekstrem Pesisir Maluku Utara</p>
-                            <span class="text-[9px] font-bold text-slate-400">25 Mar 2026</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-white pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
-                <div>
-                    <div class="flex items-center space-x-3 mb-6">
-                        <img src="image/logo pulau taliabu.png" alt="Logo" class="h-10">
-                        <span class="text-lg font-black tracking-tighter">TALIABU <span class="text-yellow-500 text-[10px] block font-bold tracking-widest uppercase">Kabupaten</span></span>
-                    </div>
-                    <p class="text-slate-400 text-xs leading-relaxed">Portal informasi resmi Kabupaten Pulau Taliabu. Melayani dengan integritas untuk Maluku Utara.</p>
-                </div>
-                <div>
-                    <h5 class="text-white font-black text-xs uppercase tracking-widest mb-6 border-l-3 border-yellow-500 pl-3">Navigasi</h5>
-                    <ul class="space-y-3 text-xs text-slate-400 font-medium">
-                        <li><a href="#" class="hover:text-yellow-500 transition">Sekretariat Daerah</a></li>
-                        <li><a href="#" class="hover:text-yellow-500 transition">Bappeda</a></li>
-                        <li><a href="#" class="hover:text-yellow-500 transition">Diskominfo</a></li>
-                        <li><a href="#" class="hover:text-yellow-500 transition">LPSE</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-white font-black text-xs uppercase tracking-widest mb-6 border-l-3 border-yellow-500 pl-3">Layanan</h5>
-                    <ul class="space-y-3 text-xs text-slate-400 font-medium">
-                        <li><a href="#" class="hover:text-yellow-500 transition">E-Kinerja</a></li>
-                        <li><a href="#" class="hover:text-yellow-500 transition">Simda</a></li>
-                        <li><a href="#" class="hover:text-yellow-500 transition">JDIH</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-white font-black text-xs uppercase tracking-widest mb-6 border-l-3 border-yellow-500 pl-3">Kontak</h5>
-                    <p class="text-xs text-slate-400 leading-loose">
-                        Kantor Bupati, Bobong<br>
-                        Pulau Taliabu, Maluku Utara<br>
-                        info@taliabukab.go.id
-                    </p>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-slate-800 text-center text-slate-500 text-[9px] font-bold uppercase tracking-widest">
-                <p>© 2026 Pemerintah Kabupaten Pulau Taliabu.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating Action Button (Smaller on mobile) -->
-    <button class="fixed bottom-6 right-6 w-12 h-12 sm:w-16 sm:h-16 bg-yellow-400 text-slate-900 rounded-2xl shadow-2xl flex items-center justify-center text-xl sm:text-2xl hover:bg-yellow-500 z-40">
-        <i class="fas fa-headset"></i>
-    </button>
-
-    <script>
-        // Hamburger Menu Logic
-        const menuToggle = document.getElementById('menu-toggle');
-        const menuClose = document.getElementById('menu-close');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Stop scroll
+    // Event listener untuk semua navigasi (navbar dan dropdown)
+    document.querySelectorAll('.nav-item, .dropdown-menu a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.getAttribute('data-section');
+            if(section) loadSection(section);
+            // untuk mobile close sidebar
+            if(window.innerWidth <= 992) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+            // update class aktif sederhana (opsional)
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-link'));
+            link.classList.add('active-link');
         });
-
-        menuClose.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = ''; // Resume scroll
+    });
+    // menangani klik dropdown parent agar di mobile bisa membuka submenu
+    const dropdowns = document.querySelectorAll('.dropdown > a');
+    dropdowns.forEach(drop => {
+        drop.addEventListener('click', (e) => {
+            if(window.innerWidth <= 992) {
+                e.preventDefault();
+                const parentLi = drop.parentElement;
+                parentLi.classList.toggle('active');
+            }
         });
-
-        // Close menu on link click
-        const navLinks = mobileMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-    </script>
-
+    });
+    
+    // Menu mobile toggle
+    const menuIcon = document.getElementById('menuIcon');
+    const navLinks = document.getElementById('navLinks');
+    menuIcon.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+    // default home
+    loadSection('home');
+    
+    // tambahan tombol hero
+    document.querySelector('.btn-warning')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadSection('visimisi');
+        if(window.innerWidth <= 992) navLinks.classList.remove('active');
+    });
+    
+    // Fix beberapa menu dari dropdown yang mungkin belum tertangani secara spesifik dari data-section
+    // sudah semua tercover karena semua a memiliki data-section.
+    // jika belum terdefinisi pastikan semua menu di atas sudah ada di contentData
+    // tambahan untuk menampilkan informasi publik dengan sub menu dan lainnya
+    console.log("Website Pemerintah Kabupaten Pulau Taliabu siap");
+</script>
 </body>
 </html>
